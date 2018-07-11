@@ -1,0 +1,12 @@
+{
+    "plugins": ["-search", "-highlight", "prism-ext", "-lunr"],
+    "pluginsConfig": {
+      "prism": {
+        "plugins": [],
+        "cssClasses": ""
+      }
+    },
+    "styles": {
+        "website": "styles/website.css"
+    }
+}

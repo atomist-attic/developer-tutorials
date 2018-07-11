@@ -1,0 +1,356 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>How does the SDM work? · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism-ext/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="adding-pack-checkstyle.html" />
+    
+    
+    <link rel="prev" href="creating-new-project.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        <li class="header">About this series</li>
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Atomist
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Tutorials</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="getting-started.html">
+            
+                <a href="getting-started.html">
+            
+                    
+                    What you'll need to get started
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="creating-new-sdm.html">
+            
+                <a href="creating-new-sdm.html">
+            
+                    
+                    Creating a new automation client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="creating-new-project.html">
+            
+                <a href="creating-new-project.html">
+            
+                    
+                    Creating a new project from the SDM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.4" data-path="how-the-sdm-works.html">
+            
+                <a href="how-the-sdm-works.html">
+            
+                    
+                    How does the SDM work?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="adding-pack-checkstyle.html">
+            
+                <a href="adding-pack-checkstyle.html">
+            
+                    
+                    Adding non-build behavior: the Checkstyle extension
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+</ul>
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >How does the SDM work?</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h2 id="how-does-the-sdm-work">How does the SDM work?</h2>
+<p>If you look at the seed SDM, the entry point for Atomist resides in the <code>atomist.config.ts</code> file:</p>
+<pre lang="typescript" class=" language-typescript"><code class=" language-typescript"><span class="token keyword">const</span> machineOptions<span class="token punctuation">:</span> ConfigureOptions <span class="token operator">=</span> <span class="token punctuation">{</span>
+    requiredConfigurationValues<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> configuration<span class="token punctuation">:</span> Configuration <span class="token operator">=</span> <span class="token punctuation">{</span>
+    postProcessors<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token function">configureSdm</span><span class="token punctuation">(</span>machine<span class="token punctuation">,</span> machineOptions<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>The <code>Configuration</code> here is what makes Atomist tick. The <code>configureSdm</code> method will call the <code>machine</code> method (defined in <code>machine.ts</code>) which will add all the functionality to the SDM.</p>
+<pre lang="typescript" class=" language-typescript"><code class=" language-typescript"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">machine</span><span class="token punctuation">(</span>
+    configuration<span class="token punctuation">:</span> SoftwareDeliveryMachineConfiguration<span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span class="token punctuation">:</span> SoftwareDeliveryMachine <span class="token punctuation">{</span>
+
+    <span class="token keyword">const</span> sdm <span class="token operator">=</span> <span class="token function">createSoftwareDeliveryMachine</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        name<span class="token punctuation">:</span> <span class="token string">&quot;Minimal Seed Software Delivery Machine&quot;</span><span class="token punctuation">,</span>
+        configuration<span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">addSpringSupport</span><span class="token punctuation">(</span>sdm<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">summarizeGoalsInGitHubStatus</span><span class="token punctuation">(</span>sdm<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> sdm<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Here, the <code>addSpringSupport</code> will add all the functionality needed to build and locally deploy a Spring Boot application.</p>
+<h2 id="events">Events</h2>
+<p>Atomist reacts to events. These events can come from the outside world, for example pushes to a Git repository or internally. In response to those events, it will trigger a set of goals grouped in goalsets, using a set of defined preconditions to determine which goalsets need to be trigger. For example, you have the goal and goalset definition in the seed SDM:</p>
+<pre lang="typescript" class=" language-typescript"><code class=" language-typescript"><span class="token keyword">export</span> <span class="token keyword">const</span> CheckGoals <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Goals</span><span class="token punctuation">(</span>
+    <span class="token string">&quot;Check&quot;</span><span class="token punctuation">,</span>
+    VersionGoal<span class="token punctuation">,</span>
+    ReviewGoal<span class="token punctuation">,</span>
+    AutofixGoal<span class="token punctuation">,</span>
+    FingerprintGoal<span class="token punctuation">,</span>
+    PushReactionGoal<span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> BuildGoals <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Goals</span><span class="token punctuation">(</span>
+    <span class="token string">&quot;Build&quot;</span><span class="token punctuation">,</span>
+    <span class="token operator">...</span>CheckGoals<span class="token punctuation">.</span>goals<span class="token punctuation">,</span>
+    BuildGoal<span class="token punctuation">,</span>
+    ArtifactGoal<span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> BuildWithLocalDeploymentGoals <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Goals</span><span class="token punctuation">(</span>
+    <span class="token string">&quot;Build&quot;</span><span class="token punctuation">,</span>
+    <span class="token operator">...</span>CheckGoals<span class="token punctuation">.</span>goals<span class="token punctuation">,</span>
+    BuildGoal<span class="token punctuation">,</span>
+    ArtifactGoal<span class="token punctuation">,</span>
+    <span class="token keyword">new</span> <span class="token class-name">GoalWithPrecondition</span><span class="token punctuation">(</span>LocalDeploymentGoal<span class="token punctuation">.</span>definition<span class="token punctuation">,</span> ArtifactGoal<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token keyword">new</span> <span class="token class-name">GoalWithPrecondition</span><span class="token punctuation">(</span>LocalEndpointGoal<span class="token punctuation">.</span>definition<span class="token punctuation">,</span> LocalDeploymentGoal<span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Mapping those goals to events in Atomist is done through adding goal contributions on the SDM instance:</p>
+<pre lang="typescript" class=" language-typescript"><code class=" language-typescript">sdm<span class="token punctuation">.</span><span class="token function">addGoalContributions</span><span class="token punctuation">(</span><span class="token function">goalContributors</span><span class="token punctuation">(</span>
+        <span class="token function">doNothingOnNoMaterialChange</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token function">springBootApplicationBuild</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token function">defaultMavenBuild</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>If we zoom in more closely in the <code>springBootApplicationBuild()</code>, we can exactly see how the mapping is done:</p>
+<pre lang="typescript" class=" language-typescript"><code class=" language-typescript"><span class="token keyword">return</span> <span class="token function">whenPushSatisfies</span><span class="token punctuation">(</span>IsMaven<span class="token punctuation">,</span> HasSpringBootApplicationClass<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">itMeans</span><span class="token punctuation">(</span><span class="token string">&quot;Build Spring Boot&quot;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">setGoals</span><span class="token punctuation">(</span>BuildWithLocalDeploymentGoals<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>This mapping does the following</p>
+<ul>
+<li>It triggers on a Git push</li>
+<li>It checks 2 preconditions:<ul>
+<li>It checks whether the project is a Maven project (has a POM)</li>
+<li>It checks whether the project has a Spring Boot application class (so essentially is a Spring Boot application)</li>
+</ul>
+</li>
+<li>If those preconditions match, it triggers the goals in the defined goalset</li>
+</ul>
+<p>It is important to know that Atomist will iterate through all of the goal contributions and will see who adds goals to the event. This is why the default Maven build has a <code>not</code> clause in the push tests:</p>
+<pre lang="typescript" class=" language-typescript"><code class=" language-typescript"><span class="token keyword">return</span> <span class="token function">whenPushSatisfies</span><span class="token punctuation">(</span>IsMaven<span class="token punctuation">,</span> <span class="token function">not</span><span class="token punctuation">(</span>HasSpringBootApplicationClass<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">itMeans</span><span class="token punctuation">(</span><span class="token string">&quot;Build Maven&quot;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">setGoals</span><span class="token punctuation">(</span>BuildGoals<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="providing-goal-implementations">Providing goal implementations</h2>
+<p>For most of the standard goals in Atomist, there are default implementations. However, some goals need specific implementations, like the <code>BuildGoal</code>, as it needs to know <em>how</em> it should build the code. In the case of Maven, you need to link the specific <code>MavenBuilder</code> to the build related goals:</p>
+<pre lang="typescript" class=" language-typescript"><code class=" language-typescript"><span class="token keyword">function</span> <span class="token function">enableMavenBuilder</span><span class="token punctuation">(</span>sdm<span class="token punctuation">:</span> SoftwareDeliveryMachine<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> mavenBuilder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MavenBuilder</span><span class="token punctuation">(</span>sdm<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">addBuilderForGoals</span><span class="token punctuation">(</span>sdm<span class="token punctuation">,</span> mavenBuilder<span class="token punctuation">,</span> <span class="token punctuation">[</span>BuildGoal<span class="token punctuation">,</span> JustBuildGoal<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">addBuilderForGoals</span><span class="token punctuation">(</span>sdm<span class="token punctuation">:</span> SoftwareDeliveryMachine<span class="token punctuation">,</span> builder<span class="token punctuation">:</span> Builder<span class="token punctuation">,</span> goals<span class="token punctuation">:</span> Goal<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    goals<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>goal <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        sdm<span class="token punctuation">.</span><span class="token function">addGoalImplementation</span><span class="token punctuation">(</span><span class="token string">&quot;Maven build&quot;</span><span class="token punctuation">,</span> goal<span class="token punctuation">,</span> 
+                                  <span class="token function">executeBuild</span><span class="token punctuation">(</span>sdm<span class="token punctuation">.</span>configuration<span class="token punctuation">.</span>sdm<span class="token punctuation">.</span>projectLoader<span class="token punctuation">,</span> builder<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                pushTest<span class="token punctuation">:</span> IsMaven<span class="token punctuation">,</span>
+                logInterpreter<span class="token punctuation">:</span> builder<span class="token punctuation">.</span>logInterpreter<span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>The same mechanism can been seen being used with the <code>VersionGoal</code>, which as specific behavior when it&apos;s a Maven build:</p>
+<pre lang="typescript" class=" language-typescript"><code class=" language-typescript"><span class="token keyword">function</span> <span class="token function">versioningWithMaven</span><span class="token punctuation">(</span>sdm<span class="token punctuation">:</span> SoftwareDeliveryMachine<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    sdm<span class="token punctuation">.</span><span class="token function">addGoalImplementation</span><span class="token punctuation">(</span><span class="token string">&quot;mvnVersioner&quot;</span><span class="token punctuation">,</span> VersionGoal<span class="token punctuation">,</span>
+        <span class="token function">executeVersioner</span><span class="token punctuation">(</span>sdm<span class="token punctuation">.</span>configuration<span class="token punctuation">.</span>sdm<span class="token punctuation">.</span>projectLoader<span class="token punctuation">,</span> MavenProjectVersioner<span class="token punctuation">)</span><span class="token punctuation">,</span> 
+                         <span class="token punctuation">{</span>pushTest<span class="token punctuation">:</span> IsMaven<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</body></html>
+                                
+                                </section>
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="creating-new-project.html" class="navigation navigation-prev " aria-label="Previous page: Creating a new project from the SDM">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="adding-pack-checkstyle.html" class="navigation navigation-next " aria-label="Next page: Adding non-build behavior: the Checkstyle extension">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"How does the SDM work?","level":"2.4","depth":1,"next":{"title":"Adding non-build behavior: the Checkstyle extension","level":"2.5","depth":1,"path":"tutorials/adding-pack-checkstyle.md","ref":"tutorials/adding-pack-checkstyle.md","articles":[]},"previous":{"title":"Creating a new project from the SDM","level":"2.3","depth":1,"path":"tutorials/creating-new-project.md","ref":"tutorials/creating-new-project.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["-search","-highlight","prism-ext","-lunr","livereload"],"pluginsConfig":{"prism":{"plugins":[],"cssClasses":""},"prism-ext":{},"livereload":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"tutorials/how-the-sdm-works.md","mtime":"2018-07-11T11:28:45.366Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-11T13:30:14.480Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

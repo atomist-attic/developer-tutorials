@@ -1,0 +1,269 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>What you'll need to get started · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism-ext/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="creating-new-sdm.html" />
+    
+    
+    <link rel="prev" href="../" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        <li class="header">About this series</li>
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Atomist
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Tutorials</li>
+        
+        
+    
+        <li class="chapter active" data-level="2.1" data-path="getting-started.html">
+            
+                <a href="getting-started.html">
+            
+                    
+                    What you'll need to get started
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="creating-new-sdm.html">
+            
+                <a href="creating-new-sdm.html">
+            
+                    
+                    Creating a new automation client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="creating-new-project.html">
+            
+                <a href="creating-new-project.html">
+            
+                    
+                    Creating a new project from the SDM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="how-the-sdm-works.html">
+            
+                <a href="how-the-sdm-works.html">
+            
+                    
+                    How does the SDM work?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="adding-pack-checkstyle.html">
+            
+                <a href="adding-pack-checkstyle.html">
+            
+                    
+                    Adding non-build behavior: the Checkstyle extension
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+</ul>
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >What you'll need to get started</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="what-youll-need-to-get-started">What you&apos;ll need to get started</h1>
+<p>First of all, great to see you here! It&#x2019;s awesome you want to try out Atomist and see for yourself what you can achieve using the automation tooling to provides.</p>
+<p>In order to start to use Atomist, you need to take a couple of steps first.</p>
+<h2 id="install-git">Install Git</h2>
+<p>Atomist requires using Git. You can either download the installer from the Git website or use one of the package managers (apt, yum, brew, Chocolatey) available on your system.</p>
+<h2 id="install-nodejs">Install NodeJS</h2>
+<p>The automation clients in Atomist run as Node.JS applications. This means you&#x2019;ll have to install NodeJS on your system.</p>
+<h3 id="windows">Windows</h3>
+<p>Use the Windows installer to add NodeJS to your system. You can find the download here: <a href="https://nodejs.org/en/download/" target="_blank">https://nodejs.org/en/download/</a>.</p>
+<p>If you have Chocolatey installed, run the following command from your terminal:</p>
+<pre class=" language-undefined"><code class=" language-undefined">choco install 
+nodejs.install
+</code></pre><h3 id="linux">Linux</h3>
+<p>Use your favorite package manager (apt, yum, pacman, ...) to install NodeJS on your system.</p>
+<h3 id="mac-osx">Mac OSX</h3>
+<p>You can either use the installer found at the same URL as mentioned in the Windows install or if you have brew installed, run the following command:</p>
+<pre class=" language-undefined"><code class=" language-undefined">brew install nodejs
+</code></pre><h2 id="a-slack-workspace">A Slack workspace</h2>
+<p>Install Slack (<a href="https://slack.com" target="_blank">https://slack.com</a>) and create a new workspace where you&#x2019;ll be using Atomist. You can also add Atomist to an existing Slack workspace.</p>
+<h2 id="finally-an-atomist-account">Finally, an Atomist account</h2>
+<p>You need an active Atomist account. You can link your existing GitHub account to an Atomist account here: <a href="https://app.atomist.com" target="_blank">https://app.atomist.com</a>.</p>
+<p>You&#x2019;ll need to link your Slack workspace to your Atomist workspace. Click on the settings icon in the Atomist web interface and click the Add to Slack button. You&#x2019;ll be directed to the Slack website where you need to confirm linking Atomist to your Slack workspace (make sure you use the correct one if you have multiple workspaces).</p>
+</body></html>
+                                
+                                </section>
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../" class="navigation navigation-prev " aria-label="Previous page: Atomist">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="creating-new-sdm.html" class="navigation navigation-next " aria-label="Next page: Creating a new automation client">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"What you'll need to get started","level":"2.1","depth":1,"next":{"title":"Creating a new automation client","level":"2.2","depth":1,"path":"tutorials/creating-new-sdm.md","ref":"tutorials/creating-new-sdm.md","articles":[]},"previous":{"title":"Atomist","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["-search","-highlight","prism-ext","-lunr","livereload"],"pluginsConfig":{"prism":{"plugins":[],"cssClasses":""},"prism-ext":{},"livereload":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css"}},"file":{"path":"tutorials/getting-started.md","mtime":"2018-07-10T13:25:48.070Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-11T13:30:14.480Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
