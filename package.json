@@ -16,7 +16,8 @@
   },
   "scripts": {
     "docs:prepare": "gitbook install",
-    "docs:watch": "npm run docs:prepare && gitbook serve"
+    "docs:watch": "npm run docs:prepare && gitbook serve",
+    "build": "npm run docs:prepare && gitbook build"
   },
   "engines": {
     "node": "9.x.x",
