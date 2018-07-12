@@ -1,4 +1,4 @@
-# Adding non-build behavior: the Checkstyle extension
+# Adding Checkstyle
 
 Atomist is not only able to handle build and deploy scenario's. It can perform just about any action that's related to your code. 
 
@@ -41,3 +41,5 @@ sdm.addReviewListener(slackReviewListener());
 If we now commit to our test repository, we will get a couple of errors. The current Checkstyle integration uses the Sun coding guidelines for Java, so we get something like this:
 
 ![review comments](../images/review-comments.png)
+
+Adding static analysis review is, as you can see, a breeze with Atomist. 
