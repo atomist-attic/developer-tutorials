@@ -32,5 +32,12 @@ To finish, add some configuration in your client configuration (which resides in
 }
 ```
 
+The Checkstyle support adds a reviewer to your code. A reviewer will inspect the code and inform any listeners in the SDM when certain review comments are emitted. In order to see those reviews, you also need to register a review listener in the SDM. In our case, we want to show the review comments in Slack:
 
+```
+sdm.addReviewListener(slackReviewListener());
+```
 
+If we now commit to our test repository, we will get a couple of errors. The current Checkstyle integration uses the Sun coding guidelines for Java, so we get something like this:
+
+![review comments](../images/review-comments.png)
