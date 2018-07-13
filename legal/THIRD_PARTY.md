@@ -8,14 +8,8 @@ This page details all runtime OSS dependencies of `@atomist/developer-tutorials`
 
 | License | Count |
 |---------|-------|
-|[Apache-2.0](#apache-20)|1|
 
-#### Apache-2.0
-Apache License 2.0 - [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
-| Name | Version | Publisher | Repository |
-|------|---------|-----------|------------|
-|`@atomist/developer-tutorials`|`0.1.0`|Atomist, Inc.|[https://github.com/atomist/developer-tutorials](https://github.com/atomist/developer-tutorials)|
 
 ## Contact
 
