@@ -62,3 +62,5 @@ If we now run our SDM and give Atomist the command:
 It will return this:
 
 ![command stub reply](../images/atomist-command-reply.png)
+
+Code inspection commands are very useful for extracting information out of the code or to get reports based on the current codebase. You can then relay that information back to the user in a form you seem fit.

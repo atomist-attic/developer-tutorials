@@ -9,4 +9,7 @@
 * [Creating a new project from the SDM](tutorials/creating-new-project.md)
 * [How does the SDM work?](tutorials/how-the-sdm-works.md)
 * [Adding Checkstyle](tutorials/adding-pack-checkstyle.md)
-* [Adding code inspection commands](tutorials/adding-commands.md)
+* [Adding code inspection commands](tutorials/adding-inspections.md)
+* [Transforming code](tutorials/transforming-code.md)
+* [Adding reviews: SDM, the code police](tutorials/adding-reviews.md)
+* [Autofixing code](tutorials/autofixing-code.md)
