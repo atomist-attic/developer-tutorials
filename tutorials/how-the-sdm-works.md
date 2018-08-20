@@ -75,7 +75,7 @@ sdm.addGoalContributions(goalContributors(
         springBootApplicationBuild(),
         defaultMavenBuild(),
     ));
-```
+```s
 
 If we zoom in more closely in the `springBootApplicationBuild()`, we can exactly see how the mapping is done:
 

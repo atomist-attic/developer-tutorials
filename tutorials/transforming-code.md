@@ -74,7 +74,7 @@ sdm.addCodeTransformCommand(TryToUpgradeSpringBootVersion);
 If we now run our SDM and give Atomist the command:
 
 ```
-@atomist try to upgrade Spring Boot
+atomist try to upgrade Spring Boot
 ```
 
 It will create a branch, apply the transformation and if the build succeeds, it will create a pull request for that branch. This mechanism works through the `makeBuildAware` in the `CodeTransformRegistration` definition. This can use a parameter object that extends `EditModeSuggestion` in order to get the correct information to make the commit, branch and pull request.

@@ -35,12 +35,19 @@ You can either use the installer found at the same URL as mentioned in the Windo
 brew install nodejs
 ```
 
-## A Slack workspace
+## Install the Atomist CLI
 
-Install Slack ([https://slack.com](https://slack.com)) and create a new workspace where you’ll be using Atomist. You can also add Atomist to an existing Slack workspace.
+The Atomist CLI is what enables your code to talk to Atomist running locally. Using Node.JS, you can install the CLI 
+like this:
 
-## Finally, an Atomist account
+```
+npm install -g @atomist/cli
+```
 
-You need an active Atomist account. You can link your existing GitHub account to an Atomist account here: [https://app.atomist.com](https://app.atomist.com).
+You can verify the installation by typing 
 
-You’ll need to link your Slack workspace to your Atomist workspace. Click on the settings icon in the Atomist web interface and click the Add to Slack button. You’ll be directed to the Slack website where you need to confirm linking Atomist to your Slack workspace (make sure you use the correct one if you have multiple workspaces).
+```
+atomist --help
+```
+
+You're ready now to start using Atomist locally.

@@ -8,13 +8,13 @@ SDMs can do a lot of things, from building software using various build mechanis
 
 Atomist provides the functionality right out of the box to create a brand new SDM, based on an existing one. This mechanism allows you to quickly build a new SDM but with the same base functionality. This process is called seeding.
 
-When you go into your Slack workspace where Atomist is installed, type the following in any room or directly in the `atomist` bot direct messaging channel.
+Open up a console and type in
 
 ```
-@atomist list skills
+atomist --help
 ```
 
-The Atomist bot will reply with all the intents (or chat commands) it can currently handle. In this case, as you do not have your own automation client running against your Atomist account, it will show the different automation clients Atomist provides out of the box.
+The Atomist CLI will reply with all the intents (or chat commands) it can currently handle. In this case, as you do not have your own automation client running against your Atomist account, it will show the default commands it can handle.
 
 One of these commands is `create sdm`. This will create a brand new SDM based on a seed. So type in:
 
@@ -22,65 +22,26 @@ One of these commands is `create sdm`. This will create a brand new SDM based on
 @atomist create sdm
 ```
 
-Atomist will now reply to this message and ask you a couple of questions. If you have multiple GitHub organisations coupled to your GitHub account, it will ask you in which organisation the new SDM needs to be placed. It will then ask you for a name for your SDM. Pick a name. After this, Atomist will show you a recap of all the settings it will use to create the new SDM.
+Atomist will now reply to this message and ask you a couple of questions. First it will ask you for the type of SDM you want to create. You can use the `blank` SDM which will not contain any commands, the `spring` SDM which supports delivering Spring Boot applications out of the box and the `sample` SDM which has a lot of cool features inside of it, think of it like a feature demo. It will then ask you for a name for your SDM and which Git user you'd like to use in order to map Atomist commits. Pick a name. After this, Atomist will create the new SDM.
 
-![Create SDM Slack](../images/create-sdm.png)
-
-As you can see, it will use the `sample-sdm` as a source - or seed - repository. However, this repository may be a bit overwhelming to use as a starting SDM, so let's use `seed-sdm` as a starting point, which is more lean. 
-
-```
-set source.repo seed-sdm
-```
-
-If you now click `Submit` it will create a new SDM in your GitHub repository.
-
-Atomist will ask you whether you want to make a dedicated channel for this new SDM repository. Click the button to confirm.
+As you can see, it will use the chosen SDM as a source - or seed - repository. We suggest using the `spring` SDM to start with if you just want to build a Spring Boot application. 
 
 ## Running the new SDM
 
-First of all, clone your new SDM repository to your machine
+By default, Atomist will have created a folder called `atomist` inside your home folder and in that it will have created a folder with the name of the mapped user you entered during creation. Inside that folder, you can find the SDM you just created.
+
+To run the SDM, the only thinh you need to so is
 
 ``` bash
-git clone <git SDM repo location>
-```
-
-As we mentioned in the 'Getting started' step, automation clients are NodeJS applications. So once the repository is cloned, go into the directory and call:
-
-``` bash
-npm install
-```
-
-This will install all the necessary Node modules needed for the SDM.
-
-
-To run the automation clients, you can use the npm scripts provided by the `package.json`, but there's an easier way. Atomist provides a CLI, which you can install using this command:
-
-``` bash
-npm install -g @atomist/automation-client
-```
-
-The SDM needs to have a bit of configuration in order to know how it needs to connect to your Atomist workspace. So run the following command:
-
-``` bash
-atomist config
-```
-
-And enter all the information asked in the prompt. You can find your Workspace ID in the settings screen of your workspace in the web UI ([https://app.atomist.com](https://app.atomist.com)).
-
-Once all the information has been provided, you can start the SDM.
-
-``` bash
-atomist start
+atomist start --local
 ```
 
 ## Checking the SDM functionality in Slack
 
-Once the SDM has started up, you can ask Atomist to list the skills again.
+Once the SDM has started up, you can ask Atomist to list its skills in a new command prompt.
 
 ```
-@atomist list skills
+atomist list skills
 ```
 
-In the list, you should now see your new SDM automation client in the reply.
-
-![New skills](../images/new-skills.png)
+In the list, you should now see your new SDM command in the reply.

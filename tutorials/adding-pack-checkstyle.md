@@ -38,8 +38,6 @@ The Checkstyle support adds a reviewer to your code. A reviewer will inspect the
 sdm.addReviewListener(slackReviewListener());
 ```
 
-If we now commit to our test repository, we will get a couple of errors. The current Checkstyle integration uses the Sun coding guidelines for Java, so we get something like this:
-
-![review comments](../images/review-comments.png)
+If we now commit to our test repository, we will get a couple of errors. The current Checkstyle integration uses the Sun coding guidelines for Java.
 
 Adding static analysis review is, as you can see, a breeze with Atomist. 
