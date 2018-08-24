@@ -1,6 +1,6 @@
 # What you'll need to get started
 
-First of all, great to see you here! It’s awesome you want to try out Atomist and see for yourself what you can achieve using the automation tooling to provides.
+First of all, great to see you here! It’s awesome you want to try out Atomist and see for yourself what you can achieve using the automation tooling it provides.
 
 In order to start to use Atomist, you need to take a couple of steps first.
 
@@ -10,9 +10,11 @@ Atomist requires using Git. You can either download the installer from the Git w
 
 ## Install NodeJS
 
-The automation clients in Atomist run as Node.JS applications. This means you’ll have to install NodeJS on your system.
+The Software Delivery Machines in Atomist run as Node.JS applications. This means you’ll have to [install NPM and NodeJS](https://www.npmjs.com/get-npm) on your system.
 
 ### Windows
+
+(WARNING: Windows is not )
 
 Use the Windows installer to add NodeJS to your system. You can find the download here: [https://nodejs.org/en/download/](https://nodejs.org/en/download/).
 
@@ -51,3 +53,5 @@ atomist --help
 ```
 
 You're ready now to start using Atomist locally.
+
+Continue with [creating your own SDM](creating-new-sdm.md)
