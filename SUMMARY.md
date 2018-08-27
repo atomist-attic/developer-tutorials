@@ -13,3 +13,5 @@
 * [Transforming code](tutorials/transforming-code.md)
 * [Adding reviews: SDM, the code police](tutorials/adding-reviews.md)
 * [Autofixing code](tutorials/autofixing-code.md)
+* [Building your application](tutorials/building-your-application.md)
+* [Deploying your application locally](tutorials/deploying-software.md)

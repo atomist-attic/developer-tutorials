@@ -24,7 +24,20 @@ Adding the reviewer to the SDM is very simple:
 sdm.addReviewerRegistration(ImportDotStarReviewer);
 ```
 
-Assuming we have a review listener in the SDM (like `sdm.addReviewListener(slackReviewListener());`), we now get notified when someone commits code that has a star import.
+Reviews do need a listener in order to show the review comments back to the user.
+
+``` typescript
+sdm.addReviewListenerRegistration({
+        name: "channelReplyListener",
+        listener: async l => {
+            await l.addressChannels(`${l.review.comments.length} review errors: ${l.review.comments}`);
+            for (const c of l.review.comments) {
+                await l.addressChannels(`${c.severity}: ${c.category} ` +
+                    `- ${c.detail} ${JSON.stringify(c.sourceLocation)}`);
+            }
+        },
+    });
+```
 
 You can use reviewers also to call third party services that can review your code and process the results of that review. If you want to limit when reviews are triggered, you can add a `PushTest` as well.
 
