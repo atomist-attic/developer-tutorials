@@ -15,3 +15,4 @@ This series of tutorials will guide you through all of the functionalities Atomi
 * [Autofixing code](tutorials/autofixing-code.md)
 * [Building your application](tutorials/building-your-application.md)
 * [Deploying your application locally](tutorials/deploying-software.md)
+* [Deploying your application on Cloud Foundry](tutorials/deploying-software-on-cloud.md)
