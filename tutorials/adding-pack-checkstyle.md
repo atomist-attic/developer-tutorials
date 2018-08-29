@@ -1,5 +1,13 @@
 # Adding Checkstyle
 
+<ul class="steps">
+    <li class="done"><a href="">Version</a></li>
+    <li class="active"><a href="">Review</a></li>
+    <li class="undone"><a href="">React to push</a></li>
+    <li class="undone"><a href="">Autofix</a></li>
+    <li class="undone"><a href="">Build</a></li>
+</ul>
+
 Atomist is not only able to handle build and deploy scenario's. It can perform just about any action that's related to your code. 
 
 One of these things is Checkstyle integration. Checkstyle checks whether your code is written correctly according to the styleguide of your organisation. Enabling this in your SDM is dead easy. 

@@ -26,108 +26,63 @@ export function machine(
         name: "Minimal Seed Software Delivery Machine",
         configuration,
     });
-    addSpringSupport(sdm);
-
-    summarizeGoalsInGitHubStatus(sdm);
+    
+    ...
 
     return sdm;
 }
 ```
 
-Here, the `addSpringSupport` will add all the functionality needed to build and locally deploy a Spring Boot application.
+## Goals and events
 
-## Events
+Atomist reacts to events. These events can come from the outside world, for example pushes to a Git repository or internally. In response to those events, it will trigger a set of goals grouped in goalsets, using a set of defined preconditions to determine which goalsets need to be trigger. By default, Atomist provides quite a few goals out of the box, among which:
 
-Atomist reacts to events. These events can come from the outside world, for example pushes to a Git repository or internally. In response to those events, it will trigger a set of goals grouped in goalsets, using a set of defined preconditions to determine which goalsets need to be trigger. For example, you have the goal and goalset definition in the seed SDM:
-
-``` typescript
-export const CheckGoals = new Goals(
-    "Check",
-    VersionGoal,
-    ReviewGoal,
-    AutofixGoal,
-    FingerprintGoal,
-    PushReactionGoal,
-);
-
-export const BuildGoals = new Goals(
-    "Build",
-    ...CheckGoals.goals,
-    BuildGoal,
-    ArtifactGoal,
-);
-
-export const BuildWithLocalDeploymentGoals = new Goals(
-    "Build",
-    ...CheckGoals.goals,
-    BuildGoal,
-    ArtifactGoal,
-    new GoalWithPrecondition(LocalDeploymentGoal.definition, ArtifactGoal),
-    new GoalWithPrecondition(LocalEndpointGoal.definition, LocalDeploymentGoal),
-);
-```
+* `BuildGoal`: Builds your application
+* `ArtifactGoal`: Store the built artifact of your application
+* `AutofixGoal`: Perform autofixes
 
 Mapping those goals to events in Atomist is done through adding goal contributions on the SDM instance:
 
 ``` typescript
 sdm.addGoalContributions(goalContributors(
-        doNothingOnNoMaterialChange(),
-        springBootApplicationBuild(),
-        defaultMavenBuild(),
+        onAnyPush()
+            .setGoals(new Goals("Checks", VersionGoal, ReviewGoal, PushReactionGoal, AutofixGoal)),
+        whenPushSatisfies(anySatisfied(IsMaven))
+            .setGoals(new Goals("Build", BuildGoal)),
+        ),
     ));
-```s
-
-If we zoom in more closely in the `springBootApplicationBuild()`, we can exactly see how the mapping is done:
-
-``` typescript
-return whenPushSatisfies(IsMaven, HasSpringBootApplicationClass)
-        .itMeans("Build Spring Boot")
-        .setGoals(BuildWithLocalDeploymentGoals);
 ```
 
 This mapping does the following
-* It triggers on a Git push
-* It checks 2 preconditions:
-    * It checks whether the project is a Maven project (has a POM)
-    * It checks whether the project has a Spring Boot application class (so essentially is a Spring Boot application)
-* If those preconditions match, it triggers the goals in the defined goalset
+* It triggers on a Git push and always performs 4 goals: `VersionGoal`, `ReviewGoal`, `PushReactionGoal`, `AutofixGoal`
+* It checks whether the project is a Maven project (has a POM) and adds the `BuildGoal` if this is the case
 
-It is important to know that Atomist will iterate through all of the goal contributions and will see who adds goals to the event. This is why the default Maven build has a `not` clause in the push tests:
-
-``` typescript
-return whenPushSatisfies(IsMaven, not(HasSpringBootApplicationClass))
-        .itMeans("Build Maven")
-        .setGoals(BuildGoals);
-```
+It is important to know that Atomist will iterate through all of the goal contributions and will see who adds goals to the event. In other words, the goal contributors are additive.
 
 ## Providing goal implementations
 
 For most of the standard goals in Atomist, there are default implementations. However, some goals need specific implementations, like the `BuildGoal`, as it needs to know _how_ it should build the code. In the case of Maven, you need to link the specific `MavenBuilder` to the build related goals:
 
 ``` typescript
-function enableMavenBuilder(sdm: SoftwareDeliveryMachine) {
-    const mavenBuilder = new MavenBuilder(sdm);
-    addBuilderForGoals(sdm, mavenBuilder, [BuildGoal, JustBuildGoal]);
-}
+const mavenBuilder = new MavenBuilder(sdm);
+    sdm.addGoalImplementation("Maven build",
+        BuildGoal,
+        executeBuild(sdm.configuration.sdm.projectLoader, mavenBuilder),
+        {
+            pushTest: IsMaven,
+            logInterpreter: mavenBuilder.logInterpreter,
+        });
 
-function addBuilderForGoals(sdm: SoftwareDeliveryMachine, builder: Builder, goals: Goal[]) {
-    goals.forEach(goal => {
-        sdm.addGoalImplementation("Maven build", goal, 
-                                  executeBuild(sdm.configuration.sdm.projectLoader, builder),
-            {
-                pushTest: IsMaven,
-                logInterpreter: builder.logInterpreter,
-            });
-    });
-}
 ```
 
-The same mechanism can been seen being used with the `VersionGoal`, which as specific behavior when it's a Maven build:
+If a goal doesn't have an implementation, it is skipped. In our case, this will be the case for `VersionGoal`
 
-``` typescript
-function versioningWithMaven(sdm: SoftwareDeliveryMachine) {
-    sdm.addGoalImplementation("mvnVersioner", VersionGoal,
-        executeVersioner(sdm.configuration.sdm.projectLoader, MavenProjectVersioner), 
-                         {pushTest: IsMaven});
-}
-```
+In short, the goal pipeline for a Maven build will look like this:
+
+<ul class="steps">
+    <li class="undone"><a href="">Version</a></li>
+    <li class="undone"><a href="">Review</a></li>
+    <li class="undone"><a href="">React to push</a></li>
+    <li class="undone"><a href="">Autofix</a></li>
+    <li class="undone"><a href="">Build</a></li>
+</ul>

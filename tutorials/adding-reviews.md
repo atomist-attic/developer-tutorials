@@ -1,5 +1,13 @@
 # Adding reviews: SDM, the code police
 
+<ul class="steps">
+    <li class="done"><a href="">Version</a></li>
+    <li class="active"><a href="">Review</a></li>
+    <li class="undone"><a href="">React to push</a></li>
+    <li class="undone"><a href="">Autofix</a></li>
+    <li class="undone"><a href="">Build</a></li>
+</ul>
+
 We all know that there are certain things we should not do. And some companies have very specific rules about how code should be written. We've shown before how you can use Checkstyle to add reviews to your code, but you can also be very specific about certain reviews. That is when you start writing your own reviewers.
 
 Say that we want to give someone a notice when they do a star import. We write the following reviewer:

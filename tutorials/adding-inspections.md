@@ -8,7 +8,9 @@ atomist list skills
 
 Commands can do many things. They can trigger internal SDM behavior or call external services. If it's an action you can automate, you can turn it into a command.
 
-# Creating your own command
+# Steps
+
+## 1. Creating your own command
 
 Let's say we want to create a command to quickly query what the current version is in a POM xml. Atomist has a couple of command types, one of which is a code inspection command.
 
@@ -43,13 +45,26 @@ function sendMessage(ctx: SdmContext, message: string) {
 }
 ```
 
-And register the command handler in our SDM:
+## 2. Register the new command in the SDM
+
+In order for the SDM to recognize the command, you need to register it. Open up
+your machine configuration and add the following lines:
 
 ``` typescript
 sdm.addCodeInspectionCommand(PomVersionInspection);
 ```
 
-If we now run our SDM and give Atomist the command in a project directory:
+## 3. Start up the SDM
+
+Start up your SDM in local mode.
+
+```
+atomist start --local
+```
+
+# 4. Go to your project directory and run the command
+
+Give Atomist the following command:
 
 ```
 atomist get pom version

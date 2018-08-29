@@ -26,6 +26,8 @@ Atomist will now reply to this message and ask you a couple of questions. First 
 
 As you can see, it will use the chosen SDM as a source - or seed - repository. We suggest using the `spring` SDM to start with if you just want to build a Spring Boot application. 
 
+<script src="https://asciinema.org/a/4JWYziFB9jQ9TNjGxBocmXCNA.js" id="asciicast-4JWYziFB9jQ9TNjGxBocmXCNA" async></script>
+
 ## Running the new SDM
 
 By default, Atomist will have created a folder called `atomist` inside your home folder and in that it will have created a folder with the name of the mapped user you entered during creation. Inside that folder, you can find the SDM you just created.
@@ -35,6 +37,8 @@ To run the SDM, the only thinh you need to so is
 ``` bash
 atomist start --local
 ```
+
+<script src="https://asciinema.org/a/UEh6bj3GF6KhLpUg0yHLI9QVW.js" id="asciicast-UEh6bj3GF6KhLpUg0yHLI9QVW" async></script>
 
 ## Checking the SDM functionality in Slack
 

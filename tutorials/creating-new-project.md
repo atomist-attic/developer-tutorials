@@ -21,3 +21,5 @@ Atomist will first ask you the name of your new repository where you want to cre
 ## Atomist doing its thing
 
 Immediately after creating the project, you'll see the Atomist SDM doing work in the feed. If everything works correctly, it will have deployed your new application locally.
+
+![Create Spring feed](/images/create-spring-feed.png)
