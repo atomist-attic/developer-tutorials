@@ -1,3 +1,6 @@
+<link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/styles/website.css">
+
 ## How does the SDM work?
 
 If you look at the seed SDM, the entry point for Atomist resides in the `atomist.config.ts` file:
