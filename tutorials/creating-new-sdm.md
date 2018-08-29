@@ -25,9 +25,7 @@ One of these commands is `create sdm`. This will create a brand new SDM based on
 Atomist will now reply to this message and ask you a couple of questions. First it will ask you for the type of SDM you want to create. You can use the `blank` SDM which will not contain any commands, the `spring` SDM which supports delivering Spring Boot applications out of the box and the `sample` SDM which has a lot of cool features inside of it, think of it like a feature demo. It will then ask you for a name for your SDM and which Git user you'd like to use in order to map Atomist commits. Pick a name. After this, Atomist will create the new SDM.
 
 As you can see, it will use the chosen SDM as a source - or seed - repository. We suggest using the `spring` SDM to start with if you just want to build a Spring Boot application. 
-
-<script src="https://asciinema.org/a/4JWYziFB9jQ9TNjGxBocmXCNA.js" id="asciicast-4JWYziFB9jQ9TNjGxBocmXCNA" async></script>
-
+z
 ## Running the new SDM
 
 By default, Atomist will have created a folder called `atomist` inside your home folder and in that it will have created a folder with the name of the mapped user you entered during creation. Inside that folder, you can find the SDM you just created.
@@ -37,8 +35,6 @@ To run the SDM, the only thinh you need to so is
 ``` bash
 atomist start --local
 ```
-
-<script src="https://asciinema.org/a/UEh6bj3GF6KhLpUg0yHLI9QVW.js" id="asciicast-UEh6bj3GF6KhLpUg0yHLI9QVW" async></script>
 
 ## Checking the SDM functionality in Slack
 

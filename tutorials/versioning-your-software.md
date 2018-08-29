@@ -1,13 +1,5 @@
 # Versioning your application
 
-<ul class="steps">
-    <li class="active"><a href="">Version</a></li>
-    <li class="undone"><a href="">Review</a></li>
-    <li class="undone"><a href="">React to push</a></li>
-    <li class="undone"><a href="">Autofix</a></li>
-    <li class="undone"><a href="">Build</a></li>
-</ul>
-
 Most applications are versioned using Semantic Versioning principles (we hope), but sometimes we need more informtion in order to uniquely identify versions for specific builds. 
 
 For example, Maven uses SNAPSHOT versioning and when deploying a version, it uses timestamps to uniquely identify versions. In this case, we don't really need to do anything.

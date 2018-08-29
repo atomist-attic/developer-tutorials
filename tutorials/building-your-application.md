@@ -1,13 +1,5 @@
 # Building your application
 
-<ul class="steps">
-    <li class="done"><a href="">Version</a></li>
-    <li class="done"><a href="">Review</a></li>
-    <li class="done"><a href="">React to push</a></li>
-    <li class="done"><a href="">Autofix</a></li>
-    <li class="active"><a href="">Build</a></li>
-</ul>
-
 The purpose of a CI/CD tools is offcourse to build your software. If you look at the standard goalset in the `spring-seed-sdm`, you can see it adds the build step when there is a Maven POM detected in the project:
 
 ``` typescript

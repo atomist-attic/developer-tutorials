@@ -1,13 +1,5 @@
 # Deploying your application on CloudFoundry
 
-<ul class="steps">
-    <li class="done"><a href="">Version</a></li>
-    <li class="done"><a href="">Review</a></li>
-    <li class="done"><a href="">React to push</a></li>
-    <li class="done"><a href="">Autofix</a></li>
-    <li class="done"><a href="">Build</a></li>
-    <li class="active"><a href="">Deploy on CloudFoundry</a></li>
-</ul>
 
 While local deployment is something that is definitely great, having your application deployed in the cloud is even better. Atomist makes this a breeze as well, as it supports Pivotal CloudFoundry out of the box. First of all, you need to add the CloudFoundry extension pack
 
@@ -34,11 +26,9 @@ sdm.addGoalContributions(goalContributors(
 
 Basically, our deployment pipeline looks like this:
 
-<ul class="steps">
-    <li class="undone"><a href="">Artifact</a></li>
-    <li class="undone"><a href="">Deploy to staging</a></li>
-    <li class="undone"><a href="">Communicate endpoint</a></li>
-</ul>
+```
+Artifact > Deploy to staging > Communicate endpoint
+```
 
 After adding the goals you need to instruct the Atomist SDM how it should handle these goals. You do this by adding goal implementations.
 

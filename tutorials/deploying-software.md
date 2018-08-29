@@ -1,14 +1,5 @@
 # Deploying your application locally
 
-<ul class="steps">
-    <li class="done"><a href="">Version</a></li>
-    <li class="done"><a href="">Review</a></li>
-    <li class="done"><a href="">React to push</a></li>
-    <li class="done"><a href="">Autofix</a></li>
-    <li class="done"><a href="">Build</a></li>
-    <li class="active"><a href="">Deploy locally</a></li>
-</ul>
-
 Building your application is a necessary step in order to be able to deploy your application. Atomist provides a lot of possibilities to deploy your application. You can deploy locally, to a CloudFoundry or even to Kubernetes. In this tutorial we'll show you how to easily deploy your application locally if you have a Spring Boot application. And it couldn't be simpler.
 
 The only thing you need to add to your SDM are the following lines:

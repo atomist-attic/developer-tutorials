@@ -1,13 +1,5 @@
 # Autofixing code
 
-<ul class="steps">
-    <li class="done"><a href="">Version</a></li>
-    <li class="done"><a href="">Review</a></li>
-    <li class="done"><a href="">React to push</a></li>
-    <li class="active"><a href="">Autofix</a></li>
-    <li class="undone"><a href="">Build</a></li>
-</ul>
-
 So we now know that can have Atomist complain about bad code and we can write commands to change code. But what if we know that we can automatically fix bad code? Like for example formatting or file headers? Well, that's where Atomist's autofixes come into play.
 
 Autofixes change the code automatically for you, adding a new specific autofix commit to the branch you committed the code on.

@@ -82,10 +82,10 @@ If a goal doesn't have an implementation, it is skipped. In our case, this will 
 
 In short, the goal pipeline for a Maven build will look like this:
 
-<ul class="steps">
-    <li class="undone"><a href="">Version</a></li>
-    <li class="undone"><a href="">Review</a></li>
-    <li class="undone"><a href="">React to push</a></li>
-    <li class="undone"><a href="">Autofix</a></li>
-    <li class="undone"><a href="">Build</a></li>
-</ul>
+```
++-------------+      +------------+      +-------------------+      +-------------+       +-----------+
+|             |      |            |      |                   |      |             |       |           |
+|   VERSION   --------   REVIEW  ---------   REACT TO PUSH   --------   AUTOFIX   ---------   BUILD   |
+|             |      |            |      |                   |      |             |       |           |
++-------------+      +------------+      +-------------------+      +-------------+       +-----------+
+```
