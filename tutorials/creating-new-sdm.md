@@ -1,12 +1,13 @@
 # Creating a new automation client
 
-Automation clients are the bread and butter of Atomist. They provide the functionality Atomist can use to perform automations. A software delivery machine, or SDM for short, is an automation client that, as the name suggest, adds functionality to deliver software. 
+Software delivery machines (SDMs) are the bread and butter of Atomist. 
+They provide the functionality Atomist can use to perform automations, to deliver software and other tasks important to our work.
 
 SDMs can do a lot of things, from building software using various build mechanisms to fixing code automatically and even deploying your software across multiple environments.
 
 ## Creating a new SDM
 
-Atomist provides the functionality right out of the box to create a brand new SDM, based on an existing one. This mechanism allows you to quickly build a new SDM but with the same base functionality. This process is called seeding.
+Atomist provides the functionality right out of the box to create a brand new SDM, based on an existing SDM seed (a starting point). This mechanism allows you to quickly build a new SDM but with the same base functionality. 
 
 Open up a console and type in
 
@@ -14,7 +15,7 @@ Open up a console and type in
 atomist --help
 ```
 
-The Atomist CLI will reply with all the intents (or chat commands) it can currently handle. In this case, as you do not have your own automation client running against your Atomist account, it will show the default commands it can handle.
+The Atomist CLI will reply with all the intents (or chat commands) it can currently handle. In this case, as you do not have your own SDM running against your Atomist account, it will show the default commands it can handle.
 
 One of these commands is `create sdm`. This will create a brand new SDM based on a seed. So type in:
 
@@ -30,7 +31,7 @@ z
 
 By default, Atomist will have created a folder called `atomist` inside your home folder and in that it will have created a folder with the name of the mapped user you entered during creation. Inside that folder, you can find the SDM you just created.
 
-To run the SDM, the only thinh you need to so is
+To run the SDM, the only thing you need to so is
 
 ``` bash
 atomist start --local
@@ -41,7 +42,7 @@ atomist start --local
 Once the SDM has started up, you can ask Atomist to list its skills in a new command prompt.
 
 ```
-atomist list skills
+atomist show skills
 ```
 
 In the list, you should now see your new SDM command in the reply.
